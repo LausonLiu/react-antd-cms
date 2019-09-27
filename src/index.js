@@ -1,12 +1,42 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import zhCN from 'antd/es/locale/zh_CN';
+import { ConfigProvider } from 'antd';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+import { commonRoutes } from "./routers"
+
+ReactDOM.render(
+
+    <ConfigProvider locale={zhCN}>
+        <Router>
+            <Switch>
+
+                <Route path="/admin" render={
+                    (rootProps ) => {
+                        return <App {...rootProps} />
+                    }
+                } ></Route>
+
+                {commonRoutes.map((ele, index) => {
+                    return <Route key={index}
+                        path={ele.pathname}
+                        component={ele.components}></Route>
+                })
+                }
+
+                <Redirect from="/" to="/admin" exact></Redirect>
+                <Redirect to="/404"></Redirect>
+                
+
+            </Switch>
+        </Router>
+        
+    </ConfigProvider>,
+    
+        document.getElementById('root')
+    
+    );
+    
