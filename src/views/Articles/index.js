@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import ReactDOM from "react-dom" 
 import { Card, Button, Table, Tag, Tooltip, Modal } from 'antd';
 import getTopics from "../../api"
 import XLSX from "xlsx"
+import { sheet2blob, openDownloadDialog } from "../../utils/exportTable"
 
 const ButtonGroup = Button.Group;
 const dataSource = [
@@ -46,8 +48,6 @@ const mapFieldToCN = {
     author: "作者",
 }
 
-// const sheet = XLSX.utils.table_to_sheet($('table')[0]);
-// openDownloadDialog(sheet2blob(sheet),'导出.xlsx')
 
 export default class Articles extends Component {
 
@@ -58,8 +58,8 @@ export default class Articles extends Component {
             total: 100,
             columns: [],
             isLoading: false,
-            page:1,
-            pageSize:5
+            page: 1,
+            pageSize: 5
         }
     }
 
@@ -173,11 +173,24 @@ export default class Articles extends Component {
         this.getArticleTopics(this.state.page, this.state.pageSize);
     }
 
+
+    exportXlsx = () => {
+        // console.log(ReactDOM.findDOMNode(this.articleTable))
+        const myTable = ReactDOM.findDOMNode(this.articleTable)
+        const articleTable = myTable.querySelector('table')
+        articleTable.setAttribute('id','table-to-xls')
+        // console.log(document.querySelector('#table-to-xls'))
+        const sheet = XLSX.utils.table_to_sheet(document.querySelector('#table-to-xls'));
+        openDownloadDialog(sheet2blob(sheet),'文章列表.xlsx')
+    }
+
+
     render() {
         return (
             <div>
-                <Card title="文章列表" extra={<Button type="primary">导出Excel</Button>}>
+                <Card title="文章列表" extra={<Button type="primary" onClick={this.exportXlsx}>导出Excel</Button>}>
                     <Table
+                    ref={ ref => this.articleTable = ref  }
                         loading={this.state.isLoading}
                         rowKey={rowKey => rowKey.id}
                         dataSource={this.state.dataSource}

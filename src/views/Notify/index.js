@@ -21,12 +21,12 @@ export default class Notify extends Component {
     render() {
         return (
             <div>
-                <Card title="通知中心" extra={<Badge dot><Button type="default">全部标记为已读</Button></Badge>}>
+                <Card title="通知中心" extra={<Badge dot={true} ><Button type="default">全部标记为已读</Button></Badge>}>
                     <List
                         itemLayout="horizontal"
                         dataSource={data}
                         renderItem={item => (
-                            <List.Item extra={<Badge dot><Button type="default">标记为已读</Button></Badge>} dot>
+                            <List.Item extra={<Badge dot={true} ><Button type="default">标记为已读</Button></Badge>} >
                                 <List.Item.Meta
                                     avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
                                     title={<a href="https://ant.design">{item.title}</a>}
