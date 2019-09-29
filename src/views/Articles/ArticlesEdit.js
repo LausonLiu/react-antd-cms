@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import {withRouter} from "react-router-dom"
 import { Form, Icon, Input, Button, Row, Col, Card } from 'antd';
-import "../../assets/styles/login.less"
 
-@Form.create({ name: '登录界面' })
-class Login extends Component {
+@withRouter
+@Form.create({ name: '文章编辑' })
+class ArticlesEdit extends Component {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
@@ -18,10 +19,10 @@ class Login extends Component {
         const { getFieldDecorator } = this.props.form;
         return (
             <div>
-                <Row type="flex" align="middle">
-                    <Col span={8} offset={8} className="my-login-col"> 
-                        <Card   title="用户登录" extra={ <Button type="danger" onClick={ this.props.history.goBack } >忘记密码</Button> }>
-                        <Form className="login-form" onSubmit={this.handleSubmit} >
+                <Row>
+                    <Col span={16} offset={4}> 
+                        <Card title="文章详情" extra={ <Button type="danger" onClick={ this.props.history.goBack } >取消更改</Button> }>
+                        <Form onSubmit={this.handleSubmit} className="login-form">
                             <Form.Item>
                                 {getFieldDecorator('username', {
                                     rules: [{ required: true, message: '请输入您的标题' }],
@@ -45,7 +46,7 @@ class Login extends Component {
                             </Form.Item>
                             <Form.Item>
                                 <Button type="primary" htmlType="submit" className="login-form-button">
-                                    登录
+                                    保存更改
           </Button>
                             </Form.Item>
                         </Form>
@@ -60,4 +61,4 @@ class Login extends Component {
     }
 }
 ;
-export default Login
+export default ArticlesEdit

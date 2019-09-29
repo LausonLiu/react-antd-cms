@@ -19,13 +19,13 @@ service.interceptors.response.use( (res) => {
     if( res.status === 200 ){
         return res.data;
     }else{
-        message.error('This is an error message');
+        message.error('系统繁忙，稍后再试');
     }
 
 })
 
-const getTopics = () => {
-    return service.get("/topics");
+const getTopics = (page = 1, limit = 5) => {
+    return service.get(`/topics?page=${page}&limit=${limit}`);
 }
 
 export default getTopics

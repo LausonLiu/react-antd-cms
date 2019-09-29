@@ -3,7 +3,9 @@ import {
     Dashboard,
     Login,
     NotFound,
-    Setting
+    Setting,
+    ArticlesEdit,
+    Notify
 } from "../views"
 
 const commonRoutes = [
@@ -33,7 +35,15 @@ const privateRoutes = [
         components: Articles,
         title: "文章管理",
         icon:"edit",
+        isExact: true,
         isTop: true
+    },
+    {
+        pathname: "/admin/articles/edit/:id",
+        components: ArticlesEdit,
+        title: "文章管理",
+        icon:"edit",
+        isTop: false
     },
     {
         pathname: "/admin/setting",
@@ -42,6 +52,13 @@ const privateRoutes = [
         icon:"setting",
         isTop: true
 
+    },
+    {
+        pathname: "/admin/notify",
+        components: Notify,
+        title: "通知中心",
+        icon:"notify",
+        isTop: false
     },
 ]
 

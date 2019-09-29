@@ -6,6 +6,11 @@ const Articles = Loadable({
   loading: Loading,
 });
 
+const ArticlesEdit = Loadable({
+  loader: () => import('./Articles/ArticlesEdit'),
+  loading: Loading,
+});
+
 const Dashboard = Loadable({
   loader: () => import('./Dashboard'),
   loading: Loading,
@@ -26,10 +31,17 @@ const Setting = Loadable({
   loading: Loading,
 });
 
+const Notify = Loadable({
+  loader: () => import('./Notify'),
+  loading: Loading,
+});
+
 export {
     Articles,
     Dashboard,
     Login,
     NotFound,
-    Setting
+    Setting,
+    ArticlesEdit,
+    Notify
 }
