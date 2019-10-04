@@ -18,6 +18,8 @@ this.props.history.listen( location => {
   }
 
   render() {
+    // console.log(this.props.store);
+    
     return (
       <Layout>
         <Switch>

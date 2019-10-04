@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Layout, Menu, Dropdown, Icon, Row, Col, Avatar, Badge } from 'antd';
 import { withRouter } from "react-router-dom"
 import { privateRoutes } from "../../routers"
+import { connect } from "react-redux"
 
 const { Header, Content, Sider } = Layout;
 
@@ -17,6 +18,13 @@ class MyLayout extends Component {
     // console.log(item, key, keyPath, domEvent);
     // console.log(this.props.history);
     this.props.history.push(key)
+  }
+
+  countUnreadNum() {
+    return this.props.readList.reduce((prev, next) => {
+      return prev + (next.isRead ? 0 : 1)
+    }, 0)
+    // return 3;
   }
 
   menus = () => {
@@ -43,7 +51,7 @@ class MyLayout extends Component {
               <h1 style={{ color: "#fff" }}>CMS管理系统</h1>
             </Col>
             <Col span={3} offset={13} >
-              <Badge count={5} offset={[5, 0]}>
+              <Badge count={this.countUnreadNum()} offset={[5, 0]}>
                 <div>
                   <Dropdown overlay={this.menus()}>
                     <div style={{ color: "#fff" }}>
@@ -89,4 +97,11 @@ class MyLayout extends Component {
   }
 }
 
-export default MyLayout;
+const mapStateToProps = (state) => {
+  // console.log(state);
+  return {
+    readList: state
+  }
+}
+
+export default connect(mapStateToProps)(MyLayout);
