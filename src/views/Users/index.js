@@ -8,7 +8,7 @@ const columns = [
         title: '序号',
         dataIndex: 'id',
         key: 'id',
-        render: id => <Link to={"/admin/users/detail/"+ id } >{id}</Link>,
+        render: id => <Link to={"/admin/users/detail/"+ id } >{id}</Link>,      //跳转至用户详情界面
     },
     {
         title: '用户名',
@@ -33,14 +33,14 @@ const columns = [
     },
 ];
 
+//定义删除操作函数
 const delUser = (_this,record) => {
-    // console.log(_this.state.userList)
-    // console.log(record)
+    //过滤选中的用户数据
     _this.setState({
         userList:_this.state.userList.filter( item => {
             return item.id !== record.id;
         } )
-    }, () => {localStorage.setItem("userskey", JSON.stringify(_this.state.userList))});
+    }, () => {localStorage.setItem("userskey", JSON.stringify(_this.state.userList))});     //修改本地存储
 }
 
 export default class Users extends Component {
@@ -48,18 +48,21 @@ export default class Users extends Component {
     constructor(props){
         super(props);
         this.state={
-            userList:[]
+            userList:[]     //定义表格展示数据（用户数据）
         }
     }
 
     componentDidMount() {
-        _this = this;
+        //声明_this传递给删除操作
+        _this = this;   
+        //获取本地存储数据并赋值给state
         const UserData = localStorage.getItem("userskey") ? JSON.parse(localStorage.getItem("userskey")) : [];
         this.setState({
             userList: UserData
         })
     }
 
+    //antd卡片组件和表格组件渲染
     render() {
         return (
             <div>
