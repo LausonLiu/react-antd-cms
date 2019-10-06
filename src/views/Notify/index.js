@@ -21,29 +21,6 @@ import { connect } from "react-redux"
 
 class Notify extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillMount() {
-
-        // this.unsubscribe = this.props.subscribe( () => {
-        //     this.setState({
-        //         unreadNum: this.props.getState().unreadNum
-        //     })
-        // } )
-    }
-
-    componentDidMount() {
-        // this.unsubscribe();
-    }
-
-    // countUnreadNum(){
-    //     return this.props.readList.reduce( (prev, next) => {
-    //         return prev + (next.isRead ? 0 : 1)
-    //     }, 0)
-    //     // return 3;
-    // }
 
     render() {
         return (

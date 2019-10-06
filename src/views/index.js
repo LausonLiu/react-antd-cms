@@ -1,6 +1,7 @@
-import Loadable from 'react-loadable';
-import Loading from '../components/Loading';
+import Loadable from 'react-loadable';  //导入路由懒加载插件
+import Loading from '../components/Loading';  //导入加载组件
  
+//路由懒加载设置
 const Articles = Loadable({
   loader: () => import('./Articles'),
   loading: Loading,
@@ -31,6 +32,21 @@ const Setting = Loadable({
   loading: Loading,
 });
 
+const Users = Loadable({
+  loader: () => import('./Users'),
+  loading: Loading,
+});
+
+const UserAdd = Loadable({
+  loader: () => import('./Users/UserAdd'),
+  loading: Loading,
+});
+
+const UserDetail = Loadable({
+  loader: () => import('./Users/UserDetail'),
+  loading: Loading,
+});
+
 const Notify = Loadable({
   loader: () => import('./Notify'),
   loading: Loading,
@@ -43,5 +59,8 @@ export {
     NotFound,
     Setting,
     ArticlesEdit,
-    Notify
+    Notify,
+    Users,
+    UserAdd,
+    UserDetail
 }

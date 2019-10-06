@@ -5,9 +5,13 @@ import {
     NotFound,
     Setting,
     ArticlesEdit,
-    Notify
+    Notify,
+    Users,
+    UserAdd,
+    UserDetail
 } from "../views"
 
+// 设置公共路由
 const commonRoutes = [
     {
         pathname: "/login",
@@ -19,7 +23,7 @@ const commonRoutes = [
     }
 ]
 
-
+//设置私有路由
 const privateRoutes = [
         
     {
@@ -58,6 +62,28 @@ const privateRoutes = [
         components: Notify,
         title: "通知中心",
         icon:"notify",
+        isTop: false
+    },
+    {
+        pathname: "/admin/users",
+        components: Users,
+        title: "用户管理",
+        isExact: true,
+        icon:"user",
+        isTop: true
+    },
+    {
+        pathname: "/admin/users/useradd",
+        components: UserAdd,
+        title: "用户添加",
+        icon:"UserAdd",
+        isTop: false
+    },
+    {
+        pathname: "/admin/users/detail/:id",
+        components: UserDetail,
+        title: "用户详情",
+        icon:"UserDetail",
         isTop: false
     },
 ]
